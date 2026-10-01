@@ -1,0 +1,15 @@
+fastapi>=0.111.0
+uvicorn>=0.30.0
+sqlalchemy>=2.0.0
+pydantic>=2.7.0
+python-dotenv>=1.0.1
+python-multipart>=0.0.9
+langchain==0.3.27
+langchain-openai==0.3.7
+faster-whisper>=1.0.3
+# ctranslate2 >=4.5 has a known Windows CPU crash (STATUS_ACCESS_VIOLATION)
+# when loading Whisper models on some machines. Pin to 4.4.0, confirmed
+# working here. Re-test before loosening this constraint.
+ctranslate2==4.4.0
+# chromadb 1.x crashes on collection.add() on this Windows machine. 0.5.23 works.
+chromadb==0.5.23

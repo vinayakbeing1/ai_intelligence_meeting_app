@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meeting Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-a"></div>
+    <div class="bg-orb bg-orb-b"></div>
+
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">AI Meeting Intelligence & Action Tracker</p>
+          <h1>Upload a meeting recording, track the transcript, and query it instantly.</h1>
+          <p class="lead">
+            Transcribe the audio, extract actions and decisions, store the analysis, and ask questions about what happened in the meeting.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div class="metric">
+            <span>Workflow</span>
+            <strong>Upload → Transcribe → Analyze → Query</strong>
+          </div>
+          <div class="metric">
+            <span>Supported inputs</span>
+            <strong>MP3, WAV, M4A, MP4</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid">
+        <article class="panel upload-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">1. Upload</p>
+              <h2>New meeting recording</h2>
+            </div>
+          </div>
+          <form id="uploadForm" class="upload-form">
+            <label class="file-drop">
+              <input id="audioFile" name="file" type="file" accept="audio/*,video/mp4" required />
+              <span class="file-title">Choose a recording</span>
+              <span class="file-subtitle">Drop an audio file here or click to browse.</span>
+            </label>
+            <button class="primary-btn" type="submit">Start processing</button>
+          </form>
+          <div id="uploadStatus" class="status-box">No upload yet.</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">2. Meetings</p>
+              <h2>Recent uploads</h2>
+            </div>
+            <button id="refreshButton" class="ghost-btn" type="button">Refresh</button>
+          </div>
+          <div class="panel-note">
+            Select a meeting to review its transcript, actions, decisions, blockers, and ask follow-up questions.
+          </div>
+          <div class="table-wrap">
+            <table class="meetings-table">
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="meetingsList"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid detail-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">3. Details</p>
+              <h2>Selected meeting</h2>
+            </div>
+          </div>
+          <div id="meetingDetails" class="details-empty">
+            Select a meeting to see its transcript, summary, and extracted action items.
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">4. Ask</p>
+              <h2>Query the meeting</h2>
+            </div>
+          </div>
+          <form id="queryForm" class="query-form">
+            <textarea id="questionInput" rows="4" placeholder="What tasks were assigned to Rahul? What are the deadlines?" required></textarea>
+            <button class="primary-btn" type="submit">Ask question</button>
+          </form>
+          <div class="answer-block">
+            <h3>Answer</h3>
+            <div id="queryAnswer" class="answer-empty">Ask a question after selecting a completed meeting.</div>
+          </div>
+          <div class="answer-block">
+            <h3>Sources</h3>
+            <div id="querySources" class="source-list">No sources yet.</div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
