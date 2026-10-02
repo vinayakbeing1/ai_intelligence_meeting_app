@@ -13,9 +13,8 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Fix CTranslate2 executable-stack issue
-RUN find /usr/local/lib/python3.12/site-packages/ctranslate2 \
-    -type f -name "*.so*" \
+RUN find /usr/local/lib/python3.12/site-packages/ctranslate2.libs \
+    -type f -name "libctranslate2*.so*" \
     -exec patchelf --clear-execstack {} \;
 
 COPY . .
