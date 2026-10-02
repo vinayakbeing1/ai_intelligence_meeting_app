@@ -6,11 +6,17 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg libgomp1 \
+    && apt-get install -y --no-install-recommends ffmpeg libgomp1 patchelf \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
+
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Fix CTranslate2 executable-stack issue
+RUN find /usr/local/lib/python3.12/site-packages/ctranslate2 \
+    -type f -name "*.so*" \
+    -exec patchelf --clear-execstack {} \;
 
 COPY . .
 
